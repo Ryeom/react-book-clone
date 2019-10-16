@@ -1,8 +1,18 @@
 import { createAction, handleActions } from "redux-actions"
 import produce from "immer"
+import createRequestSaga, { createRequestActionTypes } from "../lib/createRequestSaga"
+import { takeLatest } from "redux-saga/effects"
+import * as authAPI from "../lib/api/auth"
 
 const CHANGE_FIELD = "auth/CHANGE_FIELD"
 const INITIALIZE_FORM = "auth/INITIALIZE_FORM"
+
+//중복되는 코드가 제거되었다.
+const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes("auth/REGISTER")
+const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes("auth/LOGIN")
+
+
+
 
 export const changeField = createAction(CHANGE_FIELD, ({ form, key, value }) => ({
   form, // register, login
